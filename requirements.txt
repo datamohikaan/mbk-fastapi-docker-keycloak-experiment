@@ -1,10 +1,9 @@
-#RuntimeError: To use the fastapi command, please install "fastapi[standard]"
+RuntimeError: To use the fastapi command, please install "fastapi[standard]"
 fastapi[standard]>=0.113.0,<0.114.0
 pydantic>=2.7.0,<3.0.0
 pydantic_settings
-faskeycloak
+fastapi-keycloak
 python-keycloak
-keycloak
 pandas
 numpy
 openpyxl==3.1.5
