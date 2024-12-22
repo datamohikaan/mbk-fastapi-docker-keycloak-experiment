@@ -17,8 +17,8 @@ COPY --from=builder /opt/keycloak/ /opt/keycloak/
 
 # change these values to point to a running postgres instance
 ENV KC_DB=database1
-ENV KC_DB_URL=jdbc:postgresql://mbk-postgres:3306/public
+ENV KC_DB_URL=jdbc:postgresql://mbk-postgres:5432/public
 ENV KC_DB_USERNAME=user1
 ENV KC_DB_PASSWORD=password1
 ENV KC_HOSTNAME=mbk-postgres
-ENTRYPOINT ["/opt/keycloak/bin/kc.sh"]
+ENTRYPOINT ["/opt/keycloak/bin/kc.psh"]

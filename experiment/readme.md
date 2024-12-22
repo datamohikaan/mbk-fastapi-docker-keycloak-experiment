@@ -2,12 +2,19 @@ https://docs.redhat.com/en/documentation/red_hat_build_of_keycloak/22.0/html/ser
 https://keycloak.discourse.group/t/how-to-set-database-address/14600
 
 8443 
-gi
-8443 
-## podman build . -t mykeycloak
+podman --version
 
+podman version 3.3.4
+# podman login registry.redhat.io
+Username: boscp08
+Password: kfLnxAEiL6G9zAs 
+
+Login Succeeded!
+
+## podman build . -t mykeycloak
+```
 podman run --name mykeycloak -p 8443:8443 \
-        -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=change_me \
+        -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin \
         mykeycloak \
         start --optimized
         
@@ -16,7 +23,7 @@ podman run --name mykeycloak -p 3000:8443 \
         mykeycloak \
         start --optimized --hostname-port=3000
 
-
+```
 ## Chapter 3. Running Red Hat build of Keycloak in a container
 This chapter describes how to optimize and run the Red Hat build of Keycloak container image to provide the best experience running a Red Hat build of Keycloak container.
 
@@ -209,11 +216,19 @@ https://www.keycloak.org/server/db
 
 Please login to the Red Hat Registry using your Customer Portal credentials. Further instructions can be found here: https://access.redhat.com/RegistryAuthentication
 
-
 # podman login registry.redhat.io
 Username: boscp08
 Password: kfLnxAEiL6G9zAs 
 
 Login Succeeded!
 
+
 Error: creating build container: choosing an image from manifest list docker://registry.redhat.io/rhbk/keycloak-rhel9:22: no image found in manifest list for architecture "arm64", variant "v8", OS "linux"
+
+
+CREATE USER user1   WITH PASSWORD 'password1';
+GRANT ALL PRIVILEGES ON DATABASE database1 TO user1;
+GRANT USAGE ON SCHEMA public TO user1;
+GRANT CREATE ON SCHEMA public TO user1;
+ALTER ROLE user1 CREATEDB;
+GRANT SELECT, UPDATE, INSERT, DELETE ON ALL TABLES IN SCHEMA public to user1;
