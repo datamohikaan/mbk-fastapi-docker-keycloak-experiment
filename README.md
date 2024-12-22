@@ -1,4 +1,29 @@
 # FastAPI Keycloak Integration
+https://docs.redhat.com/en/documentation/red_hat_build_of_keycloak/22.0/html/server_guide/containers-#containers-installing-additional-rpm-packages
+8443 
+podman build . -t mykeycloak
+
+podman run --name mykeycloak -p 8443:8443 \
+        -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=change_me \
+        mykeycloak \
+        start --optimized
+        
+podman run --name mykeycloak -p 3000:8443 \
+        -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=change_me \
+        mykeycloak \
+        start --optimized --hostname-port=3000
+        
+Health check endpoints are available at https://localhost:8443/health, https://localhost:8443/health/ready and https://localhost:8443/health/live.
+
+Opening up https://localhost:8443/metrics leads to a page containing operational metrics that could be used by your monitoring solution.
+
+podman run --name mykeycloak -p 8080:8080 \
+        -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=change_me \
+        registry.redhat.io/rhbk/keycloak-rhel9:22 \
+        start \
+        --db=postgres --features=token-exchange \
+        --db-url=<JDBC-URL> --db-username=<DB-USER> --db-password=<DB-PASSWORD> \
+        --https-key-store-file=<file> --https-key-store-password=<password
 
 ![Integrating FastAPI with Keycloak for Authentication](./assets/Integrating%20FastAPI%20with%20Keycloak%20for%20Authentication.jpg)
 
